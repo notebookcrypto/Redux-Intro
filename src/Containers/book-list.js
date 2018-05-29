@@ -8,7 +8,7 @@ class BookList extends Component
 
     renderList()
     {
-        return this.props.books.map( (book) => {
+        return this.props.books.map( (book) => { // Remember we use MAP function often with arrays since it is better, easier and less messy than using a for loop to iterate over each and every array element.
             return (   // remember when using Map function need a key and here since the title is unique to each item it makes sense to use it for the key, as the key needs to be a unique signature throughout the entire list.
                 <li 
                     key = {book.title} 
@@ -35,6 +35,10 @@ class BookList extends Component
 
 function mapStateToProps(state)
 {
+    // The state being passed in this function comes from the combineReducers function, which combines all our
+    // Reducers states' in one object which gets passed to this mapStateToProps method
+    // You can think of that combineReducers resulting object as the "Store"
+    // And here we are getting a list of all the state within the store and only returning the state that we are interested in.
     // Whatever is returned from here will show up as props inside of BookList
     return{
         books: state.books
@@ -46,7 +50,7 @@ function mapDispatchToProps(dispatch)
 {
     // Whenever selectBook is called, the result should be passed to all of our reducers.
     // The dispatch is what sends all the actions to all the reducers.
-    // FYI to remember that selectBook is in fact a function and not a variable. 
+    // FYI to remember that selectBook is in fact a function and not a variable but that it returns an object with type and sometimes a payload. 
     // selectBook is an actionCreator which is always a function, which we made in the index.js file in the actions folder.
     return bindActionCreators( { selectBook: selectBook }, dispatch);
 }
